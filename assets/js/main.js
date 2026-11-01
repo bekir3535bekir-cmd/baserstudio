@@ -122,7 +122,8 @@ const splitWords = (node) => {
         if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(" "));
         const w = document.createElement("span");
         w.className = "w";
-        w.innerHTML = `<span>${part}</span>`;
+        // textContent, not innerHTML: a "<" in a heading must stay text
+        w.appendChild(document.createElement("span")).textContent = part;
         frag.appendChild(w);
       });
       child.replaceWith(frag);
